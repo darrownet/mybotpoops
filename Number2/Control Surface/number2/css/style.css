@@ -1,0 +1,93 @@
+*, *:before, *:after {
+  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+}
+html, body {
+   width: 100%;
+   height: 100%;
+   border: 0px;
+   padding: 0px;
+   margin: 0px;
+   background-color: gray;
+   overflow:hidden;
+   font-family: Helvetica;
+}
+html, body {
+   /*cursor:none;*/
+}
+html{
+   text-align: center;
+}
+body {
+   position: relative;
+   width: 320px;
+   height: 480px;
+   margin: 0 auto;
+   background-color: white;
+}
+button{
+   padding: 20px;
+   margin: 25px 0 20px 0;
+   font-size: 22px;
+   font-weight: bold;
+   width: 300px;
+   color: #990000;
+}
+
+.sliderContainer{
+   position: absolute;
+   right: 10px;
+   top: 10px;
+}
+
+.slider-background{
+   width: 70px;
+   height: 220px;
+   background-image: url('../svg/slider_bar.svg');
+   background-size: 70px 220px;
+}
+
+.ui-slider{
+   position: absolute;
+   top: 12px;
+   height: 150px;
+   width: 70px;
+}
+.ui-slider-handle{
+   width: 50px;
+   height: 50px;
+   display: block;
+   background-image: url('../svg/slider_ball.svg');
+   background-size: 50px 50px;
+   background-repeat: no-repeat;
+   margin: 0 0 0 10px;
+}
+
+#display{
+   border: 2px solid black;
+   width: 300px;
+   height: 80px;
+   margin: 10px 0 0 10px;
+}
+
+.controlPad{
+   -moz-box-sizing: content-box; -webkit-box-sizing: content-box; box-sizing: content-box;
+   position: relative;
+   width: 300px;
+   height: 230px;
+   background-image: url('../svg/control_pad.svg');
+   background-size: 300px 230px;
+   background-repeat: no-repeat;
+   border: 2px solid black;
+   margin: 10px 0 0 10px;
+}
+
+#draggable{
+   width: 50px;
+   height: 50px;
+   background-image: url('../svg/control_ball.svg');
+   background-size: 50px 50px;
+   background-repeat: no-repeat;
+   position: relative;
+   left: 125px;
+   top: 125px;
+}

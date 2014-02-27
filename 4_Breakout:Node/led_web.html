@@ -1,0 +1,68 @@
+<html>
+<head></head>
+<body>
+
+<script src="../Breakout/Breakout.js"></script>
+<script>
+  //
+  var IOBoard, IOBoardEvent, Pin, host, arduino, led, led_pin, socket;
+  //
+  IOBoard = BO.IOBoard;
+  IOBoardEvent = BO.IOBoardEvent;
+  Pin = BO.Pin
+  //
+  host = "localhost";
+  arduino = new IOBoard(host, 8887);
+  //
+  led_pin = 7;
+  //
+  arduino.addEventListener(IOBoardEvent.READY, onReady);
+  //
+  function onReady(event) {
+    //
+    arduino.removeEventListener(IOBoardEvent.READY, onReady);
+    //
+    arduino.setDigitalPinMode(led_pin, Pin.DOUT);
+    //
+    led = arduino.getDigitalPin(led_pin);
+    //
+    led.value = Pin.HIGH;
+    //
+  }
+  //
+  function ledToggle (val) {
+    if(val === 0) {
+      led.value = Pin.LOW;
+    }
+    if(val === 1) {
+      led.value = Pin.HIGH;
+    }
+  }
+  //
+</script>
+
+
+<script src="http://nowir.es/socket.io/socket.io.js"></script>
+<script>
+  socket = io.connect('http://nowir.es');
+  socket.on('connect', function (data) {
+    //
+    console.log('web connection established...');
+    //
+    socket.on('led-on-relay', function (data){
+      console.log('led-on:' + data.id);
+      console.log('');
+      ledToggle(data.id);
+    });
+    //
+    socket.on('led-off-relay', function (data){
+      console.log('led-on:' + data.id);
+      console.log('');
+      ledToggle(data.id);
+    });
+    //
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset=utf-8 />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link rel="stylesheet" type="text/css" href="css/breakout_demo.css" media="all">
+        <!-- -->
+        <title>Local LED Example</title>
+        <!-- -->
+        <script src="../Breakout/Breakout.js"></script>
+        <script src="js/jquery.js"></script>
+    </head>
+    <body>
+        <h2>Simple LED example</h2>
+        <p>Local Breakout Demo</p>
+        <div class="container">
+            <p>This button controls the LED on Pin 7</p>
+            <button id="button" class="btn" type="button">LED Off</button>
+        </div>
+        <!-- -->
+        <script type="text/javascript">
+            $(document).ready(function() {
+                //
+                var IOBoard, IOBoardEvent, Pin, host, arduino, led, led_pin, led_button;
+                //
+                IOBoard = BO.IOBoard;
+                IOBoardEvent = BO.IOBoardEvent;
+                Pin = BO.Pin
+                //
+                host = "localhost";
+                arduino = new IOBoard(host, 8887);
+                //
+                led_pin = 7;
+                //
+                led_button = $('#button');
+                //
+                arduino.addEventListener(IOBoardEvent.READY, onReady);
+                //
+                function onReady(event) {
+                    //
+                    arduino.removeEventListener(IOBoardEvent.READY, onReady);
+                    //
+                    arduino.setDigitalPinMode(led_pin, Pin.DOUT);
+                    //
+                    led = arduino.getDigitalPin(led_pin);
+                    //
+                    led.value = Pin.LOW;
+                    //
+                    led_button.show();
+                    //
+                    led_button.click(function(){
+                        if ($(this).text()=="LED On") {
+                            $(this).text("LED Off");
+                            led.value = Pin.LOW;
+                        } else {
+                            $(this).text("LED On");
+                            led.value = Pin.HIGH;
+                        }
+                    });
+                }
+            });
+        </script>
+        <!-- -->
+    </body>
+</html>​
