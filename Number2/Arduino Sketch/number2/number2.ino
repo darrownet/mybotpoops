@@ -9,12 +9,12 @@ int left_eye = 6;
 
 int motorA_dir = 12;
 int motorA_mov = 3;
-int motorA_brk = 9;
+//int motorA_brk = 9;
 int motorA_spd = 0;
 
 int motorB_dir = 13;
 int motorB_mov = 11;
-int motorB_brk = 8;
+//int motorB_brk = 8;
 int motorB_spd = 0;
 
 Servo servo_bottom;
@@ -76,9 +76,95 @@ void holdIt() {
   eyesFlick(125, 10);
   digitalWrite(right_eye, HIGH);
   digitalWrite(left_eye, HIGH);
+  servo_bottom.detach();
+  servo_top.detach();
+  shakeBody();
+}
+void shakeBody() {
+  //
+  analogWrite(motorA_mov, 255);
+  //
+  digitalWrite(motorA_dir, HIGH);
+  delay(100);
+  digitalWrite(motorA_dir, LOW);
+  delay(100);
+  digitalWrite(motorA_dir, HIGH);
+  delay(100);
+  digitalWrite(motorA_dir, LOW);
+  delay(100);
+  digitalWrite(motorA_dir, HIGH);
+  delay(100);
+  digitalWrite(motorA_dir, LOW);
+  delay(100);
+  //
+  digitalWrite(motorA_dir, HIGH);
+  delay(100);
+  digitalWrite(motorA_dir, LOW);
+  delay(100);
+  digitalWrite(motorA_dir, HIGH);
+  delay(100);
+  digitalWrite(motorA_dir, LOW);
+  delay(100);
+  digitalWrite(motorA_dir, HIGH);
+  delay(100);
+  digitalWrite(motorA_dir, LOW);
+  delay(100);
+  //
+  digitalWrite(motorA_dir, HIGH);
+  delay(100);
+  digitalWrite(motorA_dir, LOW);
+  delay(100);
+  digitalWrite(motorA_dir, HIGH);
+  delay(100);
+  digitalWrite(motorA_dir, LOW);
+  delay(100);
+  digitalWrite(motorA_dir, HIGH);
+  delay(100);
+  digitalWrite(motorA_dir, LOW);
+  delay(100);
+  //
+  digitalWrite(motorA_dir, HIGH);
+  delay(100);
+  digitalWrite(motorA_dir, LOW);
+  delay(100);
+  digitalWrite(motorA_dir, HIGH);
+  delay(100);
+  digitalWrite(motorA_dir, LOW);
+  delay(100);
+  digitalWrite(motorA_dir, HIGH);
+  delay(100);
+  digitalWrite(motorA_dir, LOW);
+  delay(100);
+  //
+  digitalWrite(motorA_dir, HIGH);
+  delay(100);
+  digitalWrite(motorA_dir, LOW);
+  delay(100);
+  digitalWrite(motorA_dir, HIGH);
+  delay(100);
+  digitalWrite(motorA_dir, LOW);
+  delay(100);
+  digitalWrite(motorA_dir, HIGH);
+  delay(100);
+  digitalWrite(motorA_dir, LOW);
+  delay(100);
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  digitalWrite(motorA_dir, HIGH);
+  digitalWrite(motorB_dir, HIGH);
+  analogWrite(motorA_mov, 0);
+  analogWrite(motorB_mov, 0);
+  //
   finshUp();
 }
 void finshUp() {
+  servo_bottom.attach(4);
+  servo_top.attach(2);
   int pos = 180;
   eyes_behave = "flash";
   delay(1000);
@@ -124,20 +210,20 @@ void handleBoolean (String route, boolean value) {
 void handleString (String route, String value) {
   if (route == "direction"){
     if(value == "forward") {
-      digitalWrite(motorA_brk, LOW);
-      digitalWrite(motorB_brk, LOW);
+      //digitalWrite(motorA_brk, LOW);
+      //digitalWrite(motorB_brk, LOW);
       digitalWrite(motorA_dir, HIGH);
       digitalWrite(motorB_dir, LOW);
     } else if (value == "backward") {
-      digitalWrite(motorA_brk, LOW);
-      digitalWrite(motorB_brk, LOW);
+      //digitalWrite(motorA_brk, LOW);
+      //digitalWrite(motorB_brk, LOW);
       digitalWrite(motorA_dir, LOW);
       digitalWrite(motorB_dir, HIGH);
     } else {
       digitalWrite(motorA_dir, LOW);
       digitalWrite(motorB_dir, LOW);
-      digitalWrite(motorA_brk, HIGH);
-      digitalWrite(motorB_brk, HIGH);
+      //digitalWrite(motorA_brk, HIGH);
+      //digitalWrite(motorB_brk, HIGH);
     }
   }
   //
@@ -174,18 +260,18 @@ void setup() {
   pinMode(left_eye, OUTPUT);
   
   pinMode(motorA_dir, OUTPUT);
-  pinMode(motorA_brk, OUTPUT);
+  //pinMode(motorA_brk, OUTPUT);
   pinMode(motorB_dir, OUTPUT);
-  pinMode(motorB_brk, OUTPUT);
+  //pinMode(motorB_brk, OUTPUT);
   
   digitalWrite(right_eye, LOW);
   digitalWrite(left_eye, LOW);
   
   digitalWrite(motorA_dir, HIGH);
-  digitalWrite(motorA_brk, LOW);
+  //digitalWrite(motorA_brk, LOW);
   analogWrite(motorA_mov, motorA_spd);
   digitalWrite(motorB_dir, LOW);
-  digitalWrite(motorB_brk, LOW);
+  //digitalWrite(motorB_brk, LOW);
   analogWrite(motorB_mov, motorB_spd);
   
   servo_bottom.attach(4);
@@ -213,6 +299,7 @@ void loop() {
   }
   
   if ( !sb.connected() ) {
+    sb.connect("nowir.es");
     eyesFlash(175);
   }
   
