@@ -5,27 +5,23 @@
 <script src="../Breakout/Breakout.js"></script>
 <script>
   //
-  var IOBoard, IOBoardEvent, Pin, host, arduino, led, led_pin, socket;
+  var IOBoard, IOBoardEvent, Pin, arduino, led, led_pin, socket;
   //
   IOBoard = BO.IOBoard;
   IOBoardEvent = BO.IOBoardEvent;
   Pin = BO.Pin
   //
-  host = "localhost";
-  arduino = new IOBoard(host, 8887);
+  arduino = new IOBoard("localhost", 8887);
+  arduino.addEventListener(IOBoardEvent.READY, onReady);
   //
   led_pin = 7;
-  //
-  arduino.addEventListener(IOBoardEvent.READY, onReady);
   //
   function onReady(event) {
     //
     arduino.removeEventListener(IOBoardEvent.READY, onReady);
-    //
     arduino.setDigitalPinMode(led_pin, Pin.DOUT);
     //
     led = arduino.getDigitalPin(led_pin);
-    //
     led.value = Pin.HIGH;
     //
   }

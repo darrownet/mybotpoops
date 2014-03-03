@@ -21,31 +21,25 @@
         <script type="text/javascript">
             $(document).ready(function() {
                 //
-                var IOBoard, IOBoardEvent, Pin, host, arduino, led, led_pin, led_button;
+                var IOBoard, IOBoardEvent, Pin, arduino, led, led_pin, led_button;
                 //
                 IOBoard = BO.IOBoard;
                 IOBoardEvent = BO.IOBoardEvent;
                 Pin = BO.Pin
                 //
-                host = "localhost";
-                arduino = new IOBoard(host, 8887);
+                arduino = new IOBoard("localhost", 8887);
+                arduino.addEventListener(IOBoardEvent.READY, onReady);
                 //
                 led_pin = 7;
-                //
                 led_button = $('#button');
-                //
-                arduino.addEventListener(IOBoardEvent.READY, onReady);
                 //
                 function onReady(event) {
                     //
                     arduino.removeEventListener(IOBoardEvent.READY, onReady);
-                    //
                     arduino.setDigitalPinMode(led_pin, Pin.DOUT);
                     //
                     led = arduino.getDigitalPin(led_pin);
-                    //
                     led.value = Pin.LOW;
-                    //
                     led_button.show();
                     //
                     led_button.click(function(){
