@@ -17,7 +17,7 @@ void setup() {
   sb.addSubscribe("led", "boolean");
   sb.addPublish("message", "string");
   sb.onBooleanMessage(handleBoolean);  
-  sb.connect("nowir.es");
+  sb.connect("your server here");
   
 } 
 

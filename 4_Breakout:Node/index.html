@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset=utf-8 />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link rel="stylesheet" type="text/css" href="css/breakout_demo.css" media="all">
+        <!-- -->
+        <title>Breakout/Node LED Example</title>
+        <!-- -->
+    </head>
+    <body>
+        <!-- -->
+        <h2>Simple LED example</h2>
+        <p>Node Breakout Demo</p>
+        <div class="container">
+            <p>This button controls the LED on Pin 7<br />Over the freakin' Interwebs!</p>
+            <button id="button" class="btn" type="button">LED Off</button>
+        </div>
+        <!-- -->
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+            var socket = io.connect('http://nowir.es');
+        </script>
+        <script src="js/jquery.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                //
+                var led_button = $("#button");
+                //
+                led_button.click(function(){
+                    if ($(this).text()=="LED On") {
+                        $(this).text("LED Off");
+                        socket.emit('led-off', {id: 0});
+                    } else {
+                        $(this).text("LED On");
+                        socket.emit('led-on', {id: 1});
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>​

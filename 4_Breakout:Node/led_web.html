@@ -46,14 +46,10 @@
     console.log('web connection established...');
     //
     socket.on('led-on-relay', function (data){
-      console.log('led-on:' + data.id);
-      console.log('');
       ledToggle(data.id);
     });
     //
     socket.on('led-off-relay', function (data){
-      console.log('led-on:' + data.id);
-      console.log('');
       ledToggle(data.id);
     });
     //
